@@ -1,0 +1,57 @@
+{% load static %}
+{% load widget_tweaks %}
+{% load vendor_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tour Package System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-lg sticky top-0 left-0 right-0 z-50">
+
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <div class="text-2xl font-bold text-blue-600 animate-pulse">Tour Packages</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="hover:text-blue-600 transition">Home</a>
+                <a href="/packages/" class="hover:text-blue-600 transition">Browse Packages</a>
+
+
+{% if user.is_authenticated %}
+    {% if user|is_vendor %}
+        <a href="{% url 'vendor_dashboard' %}" class="nav-link">Dashboard</a>
+    {% else %}
+        <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    {% endif %}
+{% else %}
+{% endif %}
+
+
+                {% if user.is_authenticated %}
+                    <a href="/logout/" class="hover:text-red-600 transition">Logout</a>
+                {% else %}
+                    <div x-data="{ open: false }" class="relative" x-cloak>
+                        <button @click="open = !open" class="hover:text-blue-600 transition">Login ⮟</button>
+                        <div x-show="open" @click.away="open = false" class="absolute bg-white shadow-md rounded mt-2 py-2 w-40 z-50" style="display: none;">
+                            <a href="/login/?type=user" class="block px-4 py-2 hover:bg-gray-100">User Login</a>
+                            <a href="/login/?type=vendor" class="block px-4 py-2 hover:bg-gray-100">Vendor Login</a>
+                            <a href="/admin/login/" class="block px-4 py-2 hover:bg-gray-100">Admin Login</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <div class="p-6">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

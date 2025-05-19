@@ -1,0 +1,36 @@
+{% extends 'tourapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="bg-gradient-to-r from-blue-50 to-indigo-100 py-12 min-h-screen">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn">
+
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+      
+      <div class="animate__animated animate__zoomIn">
+        <img src="{{ package.image.url }}" alt="{{ package.title }}"
+             class="rounded-xl w-full h-96 object-cover shadow-lg transition transform hover:scale-105 duration-500">
+      </div>
+
+      <div class="flex flex-col justify-center space-y-6 animate__animated animate__fadeInRight">
+        <h2 class="text-4xl font-extrabold text-indigo-700">{{ package.title }}</h2>
+        <p class="text-gray-700 text-lg leading-relaxed">{{ package.description }}</p>
+        
+        <div class="text-gray-800 text-lg space-y-1">
+          <p><strong class="text-indigo-600">Price:</strong> ₹{{ package.price }}</p>
+          <p><strong class="text-indigo-600">Duration:</strong> {{ package.duration }} days</p>
+        </div>
+
+        <a href="{% url 'create_booking' package.id %}"
+           class="inline-block mt-4 w-fit bg-green-500 hover:bg-green-600 text-white text-lg font-semibold px-6 py-3 rounded-full shadow-md transition duration-300 animate__animated animate__pulse animate__infinite">
+          Book Now
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'tourapp/base.html' %}
+{% block content %}
+<h2>Pending Package Approvals</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th><th>Vendor</th><th>Price</th><th>Duration</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for package in packages %}
+    <tr>
+      <td>{{ package.title }}</td>
+      <td>{{ package.vendor.user.username }}</td>
+      <td>₹{{ package.price }}</td>
+      <td>{{ package.duration }} days</td>
+      <td>
+        <form method="post" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="package_id" value="{{ package.id }}">
+          <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">Approve</button>
+          <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}
+      <tr><td colspan="5">No packages pending approval.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

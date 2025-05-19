@@ -1,0 +1,44 @@
+{% extends 'tourapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200">
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md animate__animated animate__fadeInDown">
+    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-4 animate__animated animate__fadeInUp">{{ register_type|title }} Registration</h2>
+
+    {% if error %}
+      <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm animate__animated animate__shakeX">
+        {{ error }}
+      </div>
+    {% endif %}
+
+    <form method="post" class="space-y-5">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username" required
+             class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"/>
+
+      <input type="email" name="email" placeholder="Email" required
+             class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"/>
+
+      <input type="password" name="password" placeholder="Password" required
+             class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"/>
+
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required
+             class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"/>
+
+      <button type="submit"
+              class="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-300 animate__animated animate__fadeInUp">
+        Register
+      </button>
+    </form>
+
+    <p class="text-center text-sm mt-5 text-gray-600 animate__animated animate__fadeInUp">
+      Already have an account?
+      <a href="{% url 'login' %}?type={{ register_type }}" class="text-indigo-500 font-medium hover:underline">Login here</a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

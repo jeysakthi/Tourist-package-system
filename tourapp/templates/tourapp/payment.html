@@ -1,0 +1,45 @@
+{% extends 'tourapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-pink-50 to-indigo-100 px-4 py-12">
+  <div class="max-w-lg w-full bg-white p-8 rounded-3xl shadow-2xl border border-gray-100" data-aos="zoom-in" data-aos-duration="1000">
+    
+    <h2 class="text-3xl font-extrabold text-indigo-700 text-center mb-6">💳 Payment Page</h2>
+
+    <div class="bg-indigo-50 p-5 rounded-xl shadow-inner mb-6">
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Booking Summary</h3>
+      <p class="text-gray-700"><strong>📦 Package:</strong> {{ booking.package.title }}</p>
+      <p class="text-gray-700"><strong>👥 No. of Persons:</strong> {{ booking.persons }}</p>
+      <p class="text-gray-700"><strong>📅 Date:</strong> {{ booking.booking_date }}</p>
+      <p class="text-gray-700"><strong>💰 Amount:</strong> ₹{{ amount }}</p>
+    </div>
+
+    <form action="/payment_success/" method="POST" class="text-center">
+      {% csrf_token %}
+      <input type="hidden" name="booking_id" value="{{ booking.id }}">
+
+      <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="{{ razorpay_key }}"
+        data-amount="{{ amount }}"
+        data-currency="INR"
+        data-order_id="{{ order_id }}"
+        data-buttontext="🚀 Pay Now"
+        data-name="Tour Packages"
+        data-description="Payment for {{ booking.package.title }}"
+        data-image="{% static 'tourapp/logo.png' %}"
+        data-theme.color="#6366F1">
+      </script>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true });
+</script>
+{% endblock %}

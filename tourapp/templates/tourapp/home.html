@@ -1,0 +1,89 @@
+{% extends 'tourapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+<div class="relative w-full h-[90vh] overflow-hidden">
+    <div class="swiper mySwiper absolute w-full h-full z-0">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg8.jpg' %}" class="w-full h-full object-cover" alt="slide1" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg2.jpg' %}" class="w-full h-full object-cover" alt="slide2" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg3.jpg' %}" class="w-full h-full object-cover" alt="slide3" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg4.jpg' %}" class="w-full h-full object-cover" alt="slide3" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg5.jpg' %}" class="w-full h-full object-cover" alt="slide3" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg6.jpg' %}" class="w-full h-full object-cover" alt="slide3" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg7.jpg' %}" class="w-full h-full object-cover" alt="slide3" />
+            </div>
+            <div class="swiper-slide">
+                <img src="{% static 'tourapp/images/bg9.jpg' %}" class="w-full h-full object-cover" alt="slide3" />
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white z-10">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 animate__animated animate__fadeInDown">Explore Your Next Journey</h1>
+        <p class="text-xl md:text-2xl mb-6 animate__animated animate__fadeInUp">Discover top destinations, book amazing packages, and travel with ease</p>
+        <a href="/packages/" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition animate__animated animate__pulse animate__infinite">Browse Packages</a>
+    </div>
+</div>
+
+<section class="py-16 bg-gray-50" data-aos="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold mb-10 text-indigo-700">Why Choose Us?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="p-6 bg-white shadow-xl rounded-3xl" data-aos="zoom-in">
+                <img src="{% static 'tourapp/images/experience.svg' %}" class="w-16 h-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-2">Years of Experience</h3>
+                <p class="text-gray-600">We bring years of travel expertise to create personalized packages.</p>
+            </div>
+            <div class="p-6 bg-white shadow-xl rounded-3xl" data-aos="zoom-in" data-aos-delay="100">
+                <img src="{% static 'tourapp/images/secure2.svg' %}" class="w-16 h-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-2">Secure Payments</h3>
+                <p class="text-gray-600">All transactions are safe and protected with end-to-end encryption.</p>
+            </div>
+            <div class="p-6 bg-white shadow-xl rounded-3xl" data-aos="zoom-in" data-aos-delay="200">
+                <img src="{% static 'tourapp/images/support.svg' %}" class="w-16 h-16 mx-auto mb-4">
+                <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+                <p class="text-gray-600">We’re here around the clock to assist you on your travel journey.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-indigo-700 text-white py-16" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto text-center px-4">
+        <h2 class="text-4xl font-bold mb-6">Start Planning Your Dream Vacation Today!</h2>
+        <a href="/packages/" class="bg-white text-indigo-700 px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:bg-gray-200 transition">View All Packages</a>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+    var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        effect: 'fade'
+    });
+</script>
+
+{% endblock %}
